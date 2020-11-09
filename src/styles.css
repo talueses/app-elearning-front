@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: Helvetica;
+    src: url(assets/font/HelveticaLTStd-Light.otf) format("opentype");
+}
+.footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #1D1D1B;
+    font-family: 'Helvetica Neue';
+}
+
+*{
+    font-family: 'Helvetica Neue';
+    font-size: 14px;
+}
+
+.invalid-feedback{
+    font-weight: bold;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

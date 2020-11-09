@@ -1,0 +1,143 @@
+<br />
+<form [formGroup]="formExam">
+  <div class="card">
+    <div class="card-body">
+      <div class="form-group row">
+        <label for="Course_Exam" class="col-sm-2 col-form-label">Curso:</label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            id="Course_Exam"
+            formControlName="Course_Exam"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="Teacher_Course" class="col-sm-2 col-form-label"
+          >Docente:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            id="Teacher_Course"
+            formControlName="Teacher_Course"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="card">
+    <div class="card-header">Examen</div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Preguntas</th>
+              <th># Alternativas</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let Question of Questions_Exam; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ Question.Description_Question }}</td>
+              <td>{{ Question.Options_Question.length }}</td>
+              <td style="width: 10px">
+                <div class="btn-group" role="group">
+                  <button class="btn btn-info" (click)="editQuestion(i)">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn btn-danger" (click)="deleteQuestion(i)">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <hr />
+      <div class="card">
+        <div class="card-header">Detalles</div>
+        <div class="card-body">
+          <div formGroupName="Question_Exam">
+            <div class="form-group row">
+              <label for="Description_Question" class="col-12"
+                >Ingrese Pregunta</label
+              >
+              <div class="col-12">
+                <input
+                  type="text"
+                  formControlName="Description_Question"
+                  id="Description_Question"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <div formArrayName="Options_Question">
+              <table class="table table-sm table-borderless">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>OPCIONES</th>
+                    <th>PUNTAJE</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let option of options().controls; let i = index">
+                  <tr [formGroupName]="i">
+                    <td width="10px">
+                      {{ i + 1 }}
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="Description_Option"
+                        formControlName="Description_Option"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="Score_Option"
+                        formControlName="Score_Option"
+                      />
+                    </td>
+                    <td style="text-align: right" width="10px">
+                      <div class="btn-group" role="group">
+                        <button
+                          class="btn btn-danger"
+                          type="button"
+                          (click)="deleteOption(i)"
+                        >
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-right">
+          <button class="btn btn-success" (click)="addQuestion()">Agregar Pregunta</button>
+        </div>
+      </div>
+      <app-footer-exam [typeExam]="typeExam" [formGroup]="formExam"></app-footer-exam>
+    </div>
+    <div class="card-footer text-center">
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-success">Grabar</button>
+        <button type="button" class="btn btn-secondary" (click)="goBack()">Regresar</button>
+      </div>
+    </div>
+  </div>
+</form>

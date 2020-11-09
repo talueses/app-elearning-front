@@ -1,0 +1,289 @@
+<br />
+<div class="card">
+    <form [formGroup]="form" (submit)="$event.preventDefault()">
+  <div class="card-header text-center">
+    <h2 *ngIf="id; else nuevo">Editar Usuario</h2>
+    <ng-template #nuevo>
+        <h2>Nuevo Usuario</h2>
+    </ng-template>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        
+            <label for="Perfil_User">Perfil:</label>
+            <br>
+            <select
+              type="text"
+              class="form-control"
+              formControlName="Perfil_User"
+              name="Perfil_User"
+              [ngClass]="{
+                'is-invalid':
+                  form.controls['Perfil_User'].invalid &&
+                  form.controls['Perfil_User'].touched,
+                'is-valid': form.controls['Perfil_User'].valid
+              }"
+            >
+            <option value="">Seleccione Perfil</option>
+            <option [value]="perfil.id" *ngFor="let perfil of perfilUsers">{{perfil.nombre | uppercase}}</option>
+            </select>
+            <div
+                *ngIf="form.get('Perfil_User')?.errors?.required"
+                class="invalid-feedback"
+              >
+                El campo Perfil es requerido
+              </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-6">
+            <label for="Nombres_User">Nombres:</label>
+            <input
+                type="text"
+                formControlName="Nombres_User"
+                class="form-control"
+                [ngClass]="{
+                    'is-invalid':
+                    form.controls['Nombres_User'].invalid &&
+                    form.controls['Nombres_User'].touched,
+                    'is-valid': form.controls['Nombres_User'].valid
+                }"
+            />
+            <div *ngIf="form.get('Nombres_User')?.errors?.required" class="invalid-feedback">
+                El campo es requerido
+            </div>
+            
+             
+            <!-- <div *ngIf="submitted && f.Email_User.errors " class="invalid-feedback "></div> -->
+        <!-- <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead class="thead" style="text-align: center;">
+              <tr>
+                <th>#</th>
+                <th>Nombres</th>
+                <th>Perfil</th>
+                <th>Email</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: p }">
+                <td>{{ user.id }}</td>
+                <td>{{ user.nombres }} {{ user.apellidos }}</td>
+                <td>{{ user.perfil | uppercase }}</td>
+                <td>{{ user.email }}</td>
+                <td style="width: 10px;">
+                  <div
+                    class="btn-group"
+                    role="group"
+                    aria-label="Basic example"
+                  >
+                    <a
+                      [routerLink]="[user.id]"
+                      class="btn btn-secondary"
+                    >
+                      <i class="far fa-eye"></i>
+                    </a>
+                    <a
+                      [routerLink]="[user.id]"
+                      class="btn btn-info"
+                    >
+                      <i class="far fa-edit"></i>
+                    </a>
+                    <button class="btn btn-danger">
+                      <i class="far fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div> -->
+      </div>
+      <div class="col-md-6">
+        <label for="ApPaterno_User">Apellido Paterno:</label>
+        <input
+            type="text"
+            formControlName="ApPaterno_User"
+            class="form-control"
+            [ngClass]="{
+                'is-invalid':
+                  form.controls['ApPaterno_User'].invalid &&
+                  form.controls['ApPaterno_User'].touched,
+                'is-valid': form.controls['ApPaterno_User'].valid
+            }"
+        />
+        <div
+            *ngIf="form.get('ApPaterno_User')?.errors?.required"
+            class="invalid-feedback"
+          >
+            El campo paterno es requerido
+          </div>
+          <div
+            *ngIf="form.get('ApPaterno_User')?.errors?.pattern"
+            class="invalid-feedback"
+          >
+            Este campo solo permite texto
+          </div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="ApMaterno_User">Apellido Materno:</label>
+        <input
+            type="text"
+            id="ApMaterno_User"
+            formControlName="ApMaterno_User"
+            class="form-control"
+            [ngClass]="{
+                'is-invalid':
+                form.controls['ApMaterno_User'].invalid &&
+                form.controls['ApMaterno_User'].touched,
+                'is-valid': form.controls['ApMaterno_User'].valid
+            }"
+        />
+        <div *ngIf="form.get('ApMaterno_User')?.errors?.required" class="invalid-feedback">
+            El campo es requerido
+        </div>
+        <div
+            *ngIf="form.get('ApMaterno_User')?.errors?.pattern"
+            class="invalid-feedback"
+          >
+            Este campo solo permite texto
+          </div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="Celular_User">Celular:</label>
+        <input
+            type="text"
+            formControlName="Celular_User"
+            maxlength="9"
+            class="form-control"
+            [ngClass]="{
+                'is-invalid':
+                  form.controls['Celular_User'].invalid &&
+                  form.controls['Celular_User'].touched,
+                'is-valid': form.controls['Celular_User'].valid
+              }"
+        />
+        <div
+            *ngIf="form.get('Celular_User')?.errors?.required"
+            class="invalid-feedback"
+          >
+            El campo celular es requerido
+          </div>
+          <div
+            *ngIf="form.get('Celular_User')?.errors?.pattern"
+            class="invalid-feedback"
+          >
+            Este campo solo permite números
+          </div>
+          <div
+            *ngIf="form.get('Celular_User')?.errors?.minLength"
+            class="invalid-feedback"
+          >
+            Es necesario ingresar al menos 9 números
+          </div>
+      </div>
+      <div class="col-md-6">
+        <label for="Email_User">Email:</label>
+        <input
+            type="email"
+            formControlName="Email_User"
+            class="form-control "
+            [ngClass]="{
+                'is-invalid':
+                form.controls['Email_User'].invalid &&
+                form.controls['Email_User'].touched,
+                'is-valid': form.controls['Email_User'].valid
+            }"
+        />
+        <div *ngIf="form.get('Email_User')?.errors?.required" class="invalid-feedback">
+            El campo es requerido
+        </div>
+        <div
+            *ngIf="form.get('Email_User')?.errors?.pattern"
+            class="invalid-feedback"
+          >
+            Ingrese un correo válido
+          </div>
+      </div>
+      <div class="col-md-6">
+        <label for="DNI_User">DNI:</label>
+        <input
+            type="text"
+            formControlName="DNI_User"
+            maxlength="8"
+            class="form-control"
+            [ngClass]="{
+                'is-invalid':
+                  form.controls['DNI_User'].invalid &&
+                  form.controls['DNI_User'].touched,
+                'is-valid': form.controls['DNI_User'].valid
+              }"
+        />
+        <div
+            *ngIf="form.get('DNI_User')?.errors?.required"
+            class="invalid-feedback"
+          >
+            El campo DNI es requerido
+          </div>
+          <div
+            *ngIf="form.get('DNI_User')?.errors?.pattern"
+            class="invalid-feedback"
+          >
+            Este campo solo permite números
+          </div>
+      </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-12">
+            <label for="Address_User">Direcci&oacute;n:</label>
+            <input
+                type="text"
+                formControlName="Address_User"
+                class="form-control"
+                [ngClass]="{
+                    'is-invalid':
+                      form.controls['Address_User'].invalid &&
+                      form.controls['Address_User'].touched,
+                    'is-valid': form.controls['Address_User'].valid
+                }"
+            />
+            <div *ngIf="form.get('Address_User')?.errors?.required" class="invalid-feedback">
+                El campo direcci&oacute;n es requerido
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6">
+            <label for="Birthday_User">Fecha de Nacimiento:</label>
+            <input
+                type="date"
+                min="1900-01-01"
+                [max]="maxDate"
+                formControlName="Birthday_User"
+                class="form-control"
+                [ngClass]="{
+                    'is-invalid':
+                      form.controls['Birthday_User'].invalid &&
+                      form.controls['Birthday_User'].touched,
+                    'is-valid': form.controls['Birthday_User'].valid
+                }"
+            />
+            <div *ngIf="form.get('Birthday_User')?.errors?.required" class="invalid-feedback">
+              El campo nacimiento es requerido
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card-footer">
+  <div class="text-center form-group">
+    <button class="btn btn-success btn-lg m-1" [disabled]="form.invalid" type="button" (click)="submit()">Grabar</button>
+    <button class="btn btn-secondary btn-lg m-1" type="button" (click)="goback()">Cancelar</button>
+  </div>
+</div>
+</form>
+
+</div>

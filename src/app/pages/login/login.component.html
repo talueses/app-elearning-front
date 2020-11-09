@@ -1,0 +1,54 @@
+<div class="container" style="height:100vh; display: flex; align-items: center;">
+    <div class="col-md-8 offset-md-2">
+        <div class=" card align-middle">
+            <div class="card-image">
+                <img src="../../../assets/img/bluepartner.png" width="100%" alt="Blue Partner">
+            </div>
+            <h4 class="text-center">BIENVENIDO A LA MEJOR PLATAFORMA EDUCATIVA IT GREEN</h4>
+            <div class="card-body col-md-8 offset-md-2">
+                <div class="container">
+                    <form [(formGroup)]="loginForm" (submit)="$event.preventDefault()">
+                        <div class="form-group ">
+                            <label for="Email_User">USUARIO:</label>
+                            <input type="text"
+                                   formControlName="Email_User"
+                                   class="form-control "
+                                   [ngClass]="{
+                                    'is-invalid':
+                                      loginForm.controls['Email_User'].invalid &&
+                                      loginForm.controls['Email_User'].touched,
+                                    'is-valid': loginForm.controls['Email_User'].valid
+                                  }"/>
+                                <div *ngIf="loginForm.get('Email_User')?.errors?.required" class="invalid-feedback" >Usuario requerido!</div>
+                                <div *ngIf="loginForm.get('Email_User')?.errors?.pattern" class="invalid-feedback" >Por favor ingresa un correo v&aacute;lido</div>
+                        </div>
+                        <div class="form-group ">
+                            <label for="Password_User">CONTRASEÑA:</label>
+                            <input
+                                type="password"
+                                formControlName="Password_User"
+                                class="form-control "
+                                [ngClass]="{
+                                    'is-invalid':
+                                      loginForm.controls['Password_User'].invalid &&
+                                      loginForm.controls['Password_User'].touched,
+                                    'is-valid': loginForm.controls['Password_User'].valid
+                                  }" />
+                                <div *ngIf="loginForm.get('Password_User')?.errors?.required" class="invalid-feedback" >Password requerido!</div>
+                        </div>
+                        <button type="button" (click)="onSubmit()" [disabled]="loginForm.invalid " class="btn btn-success  btn-lg btn-block ">
+                        <span *ngIf="loading " class="spinner-border spinner-border-sm mr-5 "  ></span> 
+                        Ingresar
+                        </button>
+                        <div>
+                            <div class="form-group mt-3 text-center">
+                                ¿Olvidó su contraseña? - <a [routerLink]="['/forgot-password']">Recuperar</a>
+                            </div>
+                        </div>
+                        <div *ngIf="error " class="alert alert-danger mt-3 mb-0 ">{{error}}</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

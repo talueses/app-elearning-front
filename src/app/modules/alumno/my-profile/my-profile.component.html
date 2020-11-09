@@ -1,0 +1,270 @@
+<br />
+<form [formGroup]="myProfile" novalidate>
+  <div class="card">
+    <div class="card-header">Mi Perfil</div>
+    <div class="card-body">
+      <div class="form-group">
+        <label for="perfilAlumno">Perfil</label>
+        <input
+          type="text"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              myProfile.controls['perfilAlumno'].invalid &&
+              myProfile.controls['perfilAlumno'].touched,
+            'is-valid': myProfile.controls['perfilAlumno'].valid
+          }"
+          id="perfilAlumno"
+          formControlName="perfilAlumno"
+        />
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="usuarioAlumno">Nombre de Usuario</label>
+          <input
+            type="text"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid':
+                myProfile.controls['usuarioAlumno'].invalid &&
+                myProfile.controls['usuarioAlumno'].touched,
+              'is-valid': myProfile.controls['usuarioAlumno'].valid
+            }"
+            id="usuarioAlumno"
+            formControlName="usuarioAlumno"
+          />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="passwordAlumno">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid':
+                myProfile.controls['passwordAlumno'].invalid &&
+                myProfile.controls['passwordAlumno'].touched,
+              'is-valid': myProfile.controls['passwordAlumno'].valid
+            }"
+            id="passwordAlumno"
+            formControlName="passwordAlumno"
+          />
+          <div
+            *ngIf="myProfile.get('passwordAlumno')?.errors?.required"
+            class="invalid-feedback"
+          >
+            El campo Password es requerido
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="nombreAlumno">Nombres</label>
+          <input
+            type="text"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid':
+                myProfile.controls['nombreAlumno'].invalid &&
+                myProfile.controls['nombreAlumno'].touched,
+              'is-valid': myProfile.controls['nombreAlumno'].valid
+            }"
+            id="nombreAlumno"
+            formControlName="nombreAlumno"
+          />
+          <div
+            *ngIf="myProfile.get('nombreAlumno')?.errors?.required"
+            class="invalid-feedback"
+          >
+            El campo Nombre es requerido
+          </div>
+          <div
+            *ngIf="myProfile.get('nombreAlumno')?.errors?.pattern"
+            class="invalid-feedback"
+          >
+            Este campo solo permite texto
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="paternoAlumno">Paterno</label>
+          <input
+            type="text"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid':
+                myProfile.controls['paternoAlumno'].invalid &&
+                myProfile.controls['paternoAlumno'].touched,
+              'is-valid': myProfile.controls['paternoAlumno'].valid
+            }"
+            id="paternoAlumno"
+            formControlName="paternoAlumno"
+          />
+          <div
+            *ngIf="myProfile.get('paternoAlumno')?.errors?.required"
+            class="invalid-feedback"
+          >
+            El campo paterno es requerido
+          </div>
+          <div
+            *ngIf="myProfile.get('paternoAlumno')?.errors?.pattern"
+            class="invalid-feedback"
+          >
+            Este campo solo permite texto
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="maternoAlumno">Materno</label>
+          <input
+            type="text"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid':
+                myProfile.controls['maternoAlumno'].invalid &&
+                myProfile.controls['maternoAlumno'].touched,
+              'is-valid': myProfile.controls['maternoAlumno'].valid
+            }"
+            id="maternoAlumno"
+            formControlName="maternoAlumno"
+          />
+          <div
+            *ngIf="myProfile.get('maternoAlumno')?.errors?.required"
+            class="invalid-feedback"
+          >
+            El campo materno es requerido
+          </div>
+          <div
+            *ngIf="myProfile.get('maternoAlumno')?.errors?.pattern"
+            class="invalid-feedback"
+          >
+            Este campo solo permite texto
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="celularAlumno">celular</label>
+          <input
+            type="text"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid':
+                myProfile.controls['celularAlumno'].invalid &&
+                myProfile.controls['celularAlumno'].touched,
+              'is-valid': myProfile.controls['celularAlumno'].valid
+            }"
+            id="celularAlumno"
+            formControlName="celularAlumno"
+            maxlength="9"
+          />
+          <div
+            *ngIf="myProfile.get('celularAlumno')?.errors?.required"
+            class="invalid-feedback"
+          >
+            El campo celular es requerido
+          </div>
+          <div
+            *ngIf="myProfile.get('celularAlumno')?.errors?.pattern"
+            class="invalid-feedback"
+          >
+            Este campo solo permite números
+          </div>
+          <div
+            *ngIf="myProfile.get('celularAlumno')?.errors?.minLength"
+            class="invalid-feedback"
+          >
+            Es necesario ingresar al menos 9 números
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="direccionAlumno">Dirección</label>
+        <input
+          type="text"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              myProfile.controls['direccionAlumno'].invalid &&
+              myProfile.controls['direccionAlumno'].touched,
+            'is-valid': myProfile.controls['direccionAlumno'].valid
+          }"
+          id="direccionAlumno"
+          formControlName="direccionAlumno"
+        />
+        <div
+          *ngIf="myProfile.get('direccionAlumno')?.errors?.required"
+          class="invalid-feedback"
+        >
+          El campo dirección es requerido
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="nacimientoAlumno">Fecha de Nacimiento</label>
+          <input
+            type="date"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid':
+                myProfile.controls['nacimientoAlumno'].invalid &&
+                myProfile.controls['nacimientoAlumno'].touched,
+              'is-valid': myProfile.controls['nacimientoAlumno'].valid
+            }"
+            id="nacimientoAlumno"
+            formControlName="nacimientoAlumno"
+          />
+          <div
+            *ngIf="myProfile.get('nacimientoAlumno')?.errors?.required"
+            class="invalid-feedback"
+          >
+            El campo fecha de nacimiento es requerido
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="dniAlumno">DNI</label>
+          <input
+            type="text"
+            maxlength="8"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid':
+                myProfile.controls['dniAlumno'].invalid &&
+                myProfile.controls['dniAlumno'].touched,
+              'is-valid': myProfile.controls['dniAlumno'].valid
+            }"
+            id="dniAlumno"
+            formControlName="dniAlumno"
+          />
+          <div
+            *ngIf="myProfile.get('dniAlumno')?.errors?.required"
+            class="invalid-feedback"
+          >
+            El campo DNI es requerido
+          </div>
+          <div
+            *ngIf="myProfile.get('dniAlumno')?.errors?.pattern"
+            class="invalid-feedback"
+          >
+            Este campo solo permite números
+          </div>
+          <div
+            *ngIf="myProfile.get('dniAlumno')?.errors?.minLength"
+            class="invalid-feedback"
+          >
+            Es necesario ingresar al menos 8 números
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer text-center">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button
+          type="submit"
+          class="btn btn-success"
+          [disabled]="myProfile.invalid"
+        >
+          Grabar
+        </button>
+        <a routerLink="/alumno" class="btn btn-secondary">Cancelar</a>
+      </div>
+    </div>
+  </div>
+</form>

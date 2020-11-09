@@ -1,0 +1,41 @@
+<br />
+<div class="card">
+  <div class="card-header text-center">Listado de Certificados</div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="thead" style="text-align: center">
+          <tr>
+            <th>#</th>
+            <th>Certificados</th>
+            <th style="width: 180px">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let certificate of certificates
+                | paginate: { itemsPerPage: 10, currentPage: p }
+            "
+          >
+            <td>{{ certificate.id }}</td>
+            <td>{{ certificate.certificado }}</td>
+            <td style="text-align: center">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button class="btn btn-secondary" (click)="openPDF(certificate)">
+                  <i class="far fa-file-pdf"></i>&nbsp; Abrir
+                </button>
+                <button class="btn btn-info">
+                  <i class="far fa-envelope"></i>&nbsp; Enviar
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card-footer text-center">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>

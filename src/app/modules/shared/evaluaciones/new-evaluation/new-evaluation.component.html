@@ -1,0 +1,117 @@
+<br />
+<form [formGroup]="formEvaluation">
+  <div class="card">
+    <div class="card-header text-center">EVALUACIONES</div>
+    <div class="card-body">
+      <div class="row" formGroupName="searchData">
+        <div class="col-md-10">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Buscar Curso"
+              formControlName="courseSearch"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Buscar Alumno"
+              formControlName="studentSearch"    
+            />
+          </div>
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-block btn-secondary" [disabled]="f.searchData.invalid">Buscar</button>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="staticEmail" class="col-sm-2 col-form-label">Curso</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="staticEmail" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="staticEmail" class="col-sm-2 col-form-label">DNI</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" id="staticEmail" />
+        </div>
+        <label for="staticEmail" class="col-sm-2 col-form-label">Alumno</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" id="staticEmail" />
+        </div>
+      </div>
+      <hr />
+      <div class="row" formGroupName="scoreStudent">
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label for="weightScore" class="col-sm-3 col-form-label"
+                  >Peso:</label
+                >
+                <div class="col-sm-9">
+                  <input type="email" class="form-control" id="weightScore" formControlName="weightScore" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label for="gradeScore" class="col-sm-3 col-form-label"
+                  >Nota:</label
+                >
+                <div class="col-sm-9">
+                  <input type="email" class="form-control" id="gradeScore" formControlName="gradeScore" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-6">
+              <button class="btn btn-block btn-success" [disabled]="f.scoreStudent.invalid">Grabar</button>
+            </div>
+            <div class="col-md-6">
+              <button class="btn btn-block btn-danger" [disabled]="f.scoreStudent.invalid">Borrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="table-responsive">
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>COD</th>
+              <th>ALUMNO</th>
+              <th>EX. ENTR</th>
+              <th>EX. SES 01</th>
+              <th>EX. SES 02</th>
+              <th>EX. SES 05</th>
+              <th>EX. FINAL</th>
+              <th>NA01</th>
+              <th>NA02</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let evaluation of evaluations; let i = index">
+              <td>{{ i+1 }}</td>
+              <td>{{ evaluation.code }}</td>
+              <td>{{ evaluation.student }}</td>
+              <td>{{ evaluation.entrance }}</td>
+              <td>{{ evaluation.sesion_1 }}</td>
+              <td>{{ evaluation.sesion_2 }}</td>
+              <td>{{ evaluation.sesion_5 }}</td>
+              <td>{{ evaluation.final }}</td>
+              <td>{{ evaluation.na_1 }}</td>
+              <td>{{ evaluation.na_2 }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,100 @@
+<br />
+
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">CURSO : {{ course.Title_Course }}</div>
+      <div class="col-md-6">DOCENTE : {{ course.Teacher_Course }}</div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-md-12">
+        <label for="Objective_Course">Objetivo del curso:</label>
+        <textarea
+          name="Objective_Course"
+          id="Objective_Course"
+          class="form-control"
+          disabled
+        >
+    {{ course.Description_Course }}</textarea
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<mat-card class="mat-elevation-z3">
+  <a
+    [routerLink]="['exam', course.Entrance_Exam.Id_Exam]"
+    class="btn btn-block text-left"
+  >
+    &nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-graduation-cap"></i> &nbsp;
+    <b>Examen de Entrada</b>
+  </a>
+</mat-card>
+<br />
+<mat-expansion-panel 
+  *ngFor="let Learning of course.Learnings_Course; let i = index" class="mat-elevation-z3"  #panelLearning hideToggle
+>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+        <b>UNIDAD DE APRENDIZAJE {{ i + 1 }}: {{ Learning.Name_Learning }}</b>
+    </mat-panel-title>
+    <mat-icon>{{panelLearning.expanded? 'remove_circle' : 'add_circle'}}</mat-icon>
+  </mat-expansion-panel-header>
+  <div class="card-body">
+    <p>
+      {{ Learning.Description_Learning }}
+    </p>
+    <mat-expansion-panel
+      *ngFor="let Session of Learning.Sessions_Learning; let j = index"
+      class="mat-elevation-z3" #panelSession hideToggle
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <b>SESIÓN DE CLASE {{ j + 1 }} : {{ Session.Title_Sesion }}</b>
+        </mat-panel-title>
+        <mat-icon>{{panelSession.expanded? 'remove_circle' : 'add_circle'}}</mat-icon>
+      </mat-expansion-panel-header>
+      <div class="card-body">
+        <p>
+          {{ Learning.Description_Learning }}
+        </p>
+        <div class="card-body">
+          <div
+            *ngFor="let Material of Session.Materials_Session; let k = index"
+          >
+            <a
+              class="btn btn-block text-left"
+              href="{{ Material.Route_Material }}"
+              target="_blank"
+              >&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-book"></i>&nbsp;
+              <b>Material {{ k + 1 }}: </b>
+              {{ Material.Name_Material }}
+            </a>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <mat-card *ngIf="Session.Session_Exam != null" class="mat-elevation-z3">  
+        <a
+          [routerLink]="['exam', Session.Session_Exam.Id_Exam]"
+          class="btn btn-block text-left"
+        >
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <i class="fas fa-graduation-cap"></i> &nbsp;<b>Examen de Sesión</b>
+        </a>
+      </mat-card>
+    </mat-expansion-panel>
+  </div>
+</mat-expansion-panel>
+<br />
+<mat-card *ngIf="course.Final_Exam != null" class="mat-elevation-z3">
+  <a
+    [routerLink]="['exam', course.Final_Exam.Id_Exam]"
+    class="btn btn-block text-left"
+  >
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <i class="fas fa-graduation-cap"></i> &nbsp;<b>Examen Final</b>
+  </a>
+</mat-card>

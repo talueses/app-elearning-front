@@ -1,0 +1,76 @@
+<div class="card">
+  <div class="card-header">
+    <div class="form-group row">
+      <label for="Curse_Exam" class="col-sm-2 col-form-label">Curso: </label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="Course_Exam" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="Teacher_Exam" class="col-sm-2 col-form-label"
+        >Docente:
+      </label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="Teacher_Exam" />
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-sm">
+        <tbody>
+          <tr>
+            <th colspan="2">LISTA DE EXÁMENES</th>
+          </tr>
+          <tr>
+            <th>Descripción</th>
+            <th style="width: 15%;text-align: center;">Configuración</th>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-sm">
+          <tbody>
+              <tr>
+                  <td>{{ exams.Entrance_Exam.descripcion }}</td>
+                  <td style="width: 15%;">
+                      <a [routerLink]="['edit/entrada',exams.Entrance_Exam.id]" class="btn btn-info btn-block btn-sm">
+                          <i class="fas fa-edit"></i> 
+                      </a>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+      <table *ngFor="let learning of exams.Learning_Exam" class="table table-sm">
+        <tbody>
+          <tr>
+              <td>{{ learning.descripcion }}</td>
+              <td style="width: 15%;"></td>
+          </tr>
+          <tr *ngFor="let sesion of learning.Sesion_Exam">
+              <td>{{ sesion.descripcion }}</td>
+              <td style="width: 15%;">
+                <a [routerLink]="['edit/sesion',sesion.id]" class="btn btn-info btn-block btn-sm">
+                    <i class="fas fa-edit"></i> 
+                </a>
+              </td>
+          </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm">
+        <tbody>
+            <tr>
+                <td>{{ exams.Final_Exam.descripcion }}</td>
+                <td style="width: 15%;">
+                    <a [routerLink]="['edit/final',exams.Final_Exam.id]" class="btn btn-info btn-block btn-sm">
+                        <i class="fas fa-edit"></i> 
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-secondary" (click)="goBack()">Regresar al Curso</button>
+  </div>
+</div>

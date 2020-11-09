@@ -1,0 +1,170 @@
+<form [formGroup]="formExam">
+  <hr />
+  <div class="card" *ngIf="typeExam != 'entrada'">
+    <div class="card-header">Configuración</div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-6">
+          <div class="table-responsive">
+            <table class="table table-sm table-borderless">
+              <tbody>
+                <tr *ngIf="typeExam == 'sesion' || typeExam == 'final'">
+                  <td>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        id="Is_Time_Limited_N"
+                        formControlName="Is_Time_Limited"
+                        value="N"
+                      />
+                      <label class="form-check-label" for="Is_Time_Limited_N"
+                        >Sin tiempo límite</label
+                      >
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        formControlName="Is_Time_Limited"
+                        id="Is_Time_Limited_S"
+                        value="S"
+                      />
+                      <label class="form-check-label" for="Is_Time_Limited_S"
+                        >Con tiempo</label
+                      >
+                    </div>
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="MINUTOS"
+                      formControlName="Time_Limited"
+                    />
+                  </td>
+                </tr>
+                <tr *ngIf="typeExam == 'final'">
+                  <td colspan="3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="PESO %"
+                      formControlName="Weight_Considered"
+                    />
+                  </td>
+                </tr>
+                <tr *ngIf="typeExam == 'sesion'">
+                  <td colspan="3">
+                    <b>ESTE EXAMEN SE CONSIDERA PARA LA NOTA FINAL</b>
+                  </td>
+                </tr>
+                <tr *ngIf="typeExam == 'sesion'">
+                  <td>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        formControlName="Is_Weight_Considered"
+                        id="Is_Weight_Considered_N"
+                        value="N"
+                      />
+                      <label
+                        class="form-check-label"
+                        for="Is_Weight_Considered_N"
+                        >No</label
+                      >
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        formControlName="Is_Weight_Considered"
+                        id="Is_Weight_Considered_S"
+                        value="S"
+                      />
+                      <label
+                        class="form-check-label"
+                        for="Is_Weight_Considered_S"
+                        >SÍ</label
+                      >
+                    </div>
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="PESO %"
+                      formControlName="Weight_Considered"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-6">
+          <table class="table table-sm table-borderless">
+            <tbody>
+              <tr>
+                <td colspan="2"><b>APROBAR EXAMEN</b></td>
+              </tr>
+              <tr *ngIf="typeExam != 'final'">
+                <td>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      formControlName="Is_Question_Minimum"
+                      id="Is_Question_Minimum"
+                      value="S"
+                    />
+                    <label class="form-check-label" for="Is_Question_Minimum"
+                      >Cantidad preguntas correctas</label
+                    >
+                  </div>
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="PREGUNTAS CORRECTAS"
+                    formControlName="Questions_Correct"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      formControlName="Is_Higher_Score"
+                      id="Is_Higher_Score"
+                      value="S"
+                    />
+                    <label class="form-check-label" for="Is_Higher_Score"
+                      >Puntaje mayor a</label
+                    >
+                  </div>
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="Higher_Score"
+                    placeholder="PUNTAJE"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

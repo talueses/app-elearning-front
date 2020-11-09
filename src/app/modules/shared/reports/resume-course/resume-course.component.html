@@ -1,0 +1,96 @@
+<br />
+<div class="card">
+  <div class="card-header">Consultas y Reportes</div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-10">
+        <input type="text" class="form-control" placeholder="Buscar Curso" />
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-success btn-block">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>Decripción</th>
+                <th>#</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td># Inscritos:</td>
+                <td>{{ resume.inscritos }}</td>
+              </tr>
+              <tr>
+                <td># Terminaron Curso:</td>
+                <td>{{ resume.terminaron }}</td>
+              </tr>
+              <tr>
+                <td># Pendientes:</td>
+                <td>{{ resume.pendientes }}</td>
+              </tr>
+              <tr>
+                <td># Aprobados</td>
+                <td>{{ resume.aprobados }}</td>
+              </tr>
+              <tr>
+                <td># Desaprobados</td>
+                <td>{{ resume.desaprobados }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">Avance del Curso</div>
+          <div class="card-body">
+            <div style="display: block">
+              <canvas
+                baseChart
+                [data]="resumeTwotData"
+                [labels]="resumeTwoLabels"
+                [chartType]="pieChartType"
+                [options]="pieChartOptions"
+                [plugins]="pieChartPlugins"
+                [legend]="pieChartLegend"
+                [colors]="pieChartColors"
+              >
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">Resultados del Curso</div>
+          <div class="card-body">
+            <div style="display: block">
+              <canvas
+                baseChart
+                [data]="resumeOnetData"
+                [labels]="resumeOneLabels"
+                [chartType]="pieChartType"
+                [options]="pieChartOptions"
+                [plugins]="pieChartPlugins"
+                [legend]="pieChartLegend"
+                [colors]="pieChartColors"
+              >
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

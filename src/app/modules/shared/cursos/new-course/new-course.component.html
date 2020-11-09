@@ -1,0 +1,547 @@
+<br />
+<form [formGroup]="courseForm">
+  <div class="card">
+    <div class="card-body">
+      <div class="card">
+        <div class="card-header">
+          <b>Nuevo Curso</b>
+        </div>
+        <div class="card-body">
+          <div class="form-group row">
+            <label for="Title_Course" class="col-sm-2 col-form-label"
+              >Título:</label
+            >
+            <div class="col-sm-5">
+              <input
+                type="text"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    courseForm.controls['Title_Course'].invalid &&
+                    courseForm.controls['Title_Course'].touched,
+                  'is-valid': courseForm.controls['Title_Course'].valid
+                }"
+                id="Title_Course"
+                formControlName="Title_Course"
+              />
+              <div
+                *ngIf="courseForm.get('Title_Course')?.errors?.required"
+                class="invalid-feedback"
+              >
+                El campo Título es requerido
+              </div>
+            </div>
+            <label for="Teacher_Course" class="col-sm-1 col-form-label"
+              >Docente:</label
+            >
+            <div class="col-sm-4">
+              <select
+                id="Teacher_Course"
+                formControlName="Teacher_Course"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    courseForm.controls['Teacher_Course'].invalid &&
+                    courseForm.controls['Teacher_Course'].touched,
+                  'is-valid': courseForm.controls['Teacher_Course'].valid
+                }"
+              >
+                <option value="">Seleccione Docente</option>
+              </select>
+              <div
+                *ngIf="courseForm.get('Teacher_Course')?.errors?.required"
+                class="invalid-feedback"
+              >
+                El campo Docente es requerido
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="Description_Course" class="col-sm-2 col-form-label"
+              >Descripción:</label
+            >
+            <div class="col-sm-8">
+              <textarea
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    courseForm.controls['Description_Course'].invalid &&
+                    courseForm.controls['Description_Course'].touched,
+                  'is-valid': courseForm.controls['Description_Course'].valid
+                }"
+                id="Description_Course"
+                formControlName="Description_Course"
+              ></textarea>
+              <div
+                *ngIf="courseForm.get('Description_Course')?.errors?.required"
+                class="invalid-feedback"
+              >
+                El campo descripción es requerido
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group row">
+                <div class="form-check col-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="true"
+                    id="Entrance_Exam"
+                    formControlName="Entrance_Exam"
+                  />
+                  <label class="form-check-label" for="Entrance_Exam">
+                    Examen Entrada
+                  </label>
+                </div>
+                <div class="col-6 text-right">
+                  <a [routerLink]="['examenes/edit/entrada',0]" class="btn btn-secondary">
+                    ...
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-6">
+              <b>Aprendizaje</b>
+            </div>
+            <div class="col-6 text-right">
+              <button class="btn" (click)="addLearning()" [disabled]="f.Learning_Course.invalid">
+                <i class="fas fa-plus-circle"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div formGroupName="Learning_Course">
+            <div class="form-group row">
+              <label for="Title_Learning" class="col-sm-2 col-form-label"
+                >Aprendizaje:
+              </label>
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  [ngClass]="{
+                    'is-invalid':
+                      courseForm.controls.Learning_Course['controls'][
+                        'Title_Learning'
+                      ].invalid &&
+                      courseForm.controls.Learning_Course['controls'][
+                        'Title_Learning'
+                      ].touched,
+                    'is-valid':
+                      courseForm.controls.Learning_Course['controls'][
+                        'Title_Learning'
+                      ].valid
+                  }"
+                  id="Title_Learning"
+                  formControlName="Title_Learning"
+                />
+
+                <div
+                  *ngIf="
+                    this.courseForm.get('Learning_Course')['controls'][
+                      'Title_Learning'
+                    ]?.errors?.required
+                  "
+                  class="invalid-feedback"
+                >
+                  El campo Aprendizaje es requerido
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="Description_Learning" class="col-sm-2 col-form-label"
+                >Descripción:</label
+              >
+              <div class="col-sm-10">
+                <textarea
+                  class="form-control"
+                  [ngClass]="{
+                    'is-invalid':
+                      courseForm.controls.Learning_Course['controls'][
+                        'Description_Learning'
+                      ].invalid &&
+                      courseForm.controls.Learning_Course['controls'][
+                        'Description_Learning'
+                      ].touched,
+                    'is-valid':
+                      courseForm.controls.Learning_Course['controls'][
+                        'Description_Learning'
+                      ].valid
+                  }"
+                  id="Description_Learning"
+                  formControlName="Description_Learning"
+                ></textarea>
+                <div
+                  *ngIf="
+                    this.courseForm.get('Learning_Course')['controls'][
+                      'Description_Learning'
+                    ]?.errors?.required
+                  "
+                  class="invalid-feedback"
+                >
+                  El campo descripcoón es requerido
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Item Aprendizaje</th>
+                  <th style="width: 20%;">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let learning of Learnings_Course; let i = index">
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <div class="form-check form-check-inline">
+                      <div
+                        class="btn-group"
+                        role="group"
+                        aria-label="Basic example"
+                      >
+                        <button class="btn btn-info" (click)="editLearning(i)">
+                          <i class="far fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger">
+                          <i class="far fa-trash-alt"></i>
+                        </button>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="Learning_Course"
+                          id="Learning_Course"
+                        />
+                        <label class="form-check-label" for="Learning_Course">
+                          Sesiones
+                        </label>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-6">
+              <b>Sesiones</b>
+            </div>
+            <div class="col-6 text-right">
+              <button class="btn" [disabled]="f.Sesion_Course.invalid">
+                <i class="fas fa-plus-circle"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div formGroupName="Sesion_Course">
+            <div class="form-group row">
+              <label for="Title_Sesion" class="col-sm-2 col-form-label"
+                >Título:
+              </label>
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  [ngClass]="{
+                    'is-invalid':
+                      courseForm.controls.Sesion_Course['controls'][
+                        'Title_Sesion'
+                      ].invalid &&
+                      courseForm.controls.Sesion_Course['controls'][
+                        'Title_Sesion'
+                      ].touched,
+                    'is-valid':
+                      courseForm.controls.Sesion_Course['controls'][
+                        'Title_Sesion'
+                      ].valid
+                  }"
+                  id="Title_Sesion"
+                  formControlName="Title_Sesion"
+                />
+                <div
+                  *ngIf="
+                    this.courseForm.get('Sesion_Course')['controls'][
+                      'Title_Sesion'
+                    ]?.errors?.required
+                  "
+                  class="invalid-feedback"
+                >
+                  El campo sesión es requerido
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="Description_Sesion" class="col-sm-2 col-form-label"
+                >Descripción:</label
+              >
+              <div class="col-sm-8">
+                <textarea
+                  class="form-control"
+                  [ngClass]="{
+                    'is-invalid':
+                      courseForm.controls.Sesion_Course['controls'][
+                        'Description_Sesion'
+                      ].invalid &&
+                      courseForm.controls.Sesion_Course['controls'][
+                        'Description_Sesion'
+                      ].touched,
+                    'is-valid':
+                      courseForm.controls.Sesion_Course['controls'][
+                        'Description_Sesion'
+                      ].valid
+                  }"
+                  id="Description_Sesion"
+                  formControlName="Description_Sesion"
+                ></textarea>
+                <div
+                  *ngIf="
+                    this.courseForm.get('Sesion_Course')['controls'][
+                      'Description_Sesion'
+                    ]?.errors?.required
+                  "
+                  class="invalid-feedback"
+                >
+                  El campo descripción es requerido
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <div class="form-group row">
+                  <div class="form-check col-6">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value="true"
+                      id="Exam_Sesion"
+                      formControlName="Exam_Sesion"
+                    />
+                    <label class="form-check-label" for="Exam_Sesion">
+                      Examen Sesión
+                    </label>
+                  </div>
+                  <div class="col-6 text-right">
+                    <a [routerLink]="['examenes/edit/sesion',0]" class="btn btn-secondary">
+                      ...
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Item Sesión</th>
+                  <th>Con Examen</th>
+                  <th># Materiales</th>
+                  <th style="width: 20%;">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let sesion of Sesions_Course; let i = index">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <div class="form-check form-check-inline">
+                      <div
+                        class="btn-group"
+                        role="group"
+                        aria-label="Basic example"
+                      >
+                        <button class="btn btn-info">
+                          <i class="far fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger">
+                          <i class="far fa-trash-alt"></i>
+                        </button>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="Sesion_Course"
+                          id="Sesion_Course"
+                        />
+                        <label class="form-check-label" for="Sesion_Course">
+                          Material
+                        </label>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-6">
+              <b>Materiales</b>
+            </div>
+            <div class="col-6 text-right">
+              <button class="btn" [disabled]="f.Material_Course.invalid">
+                <i class="fas fa-plus-circle"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div formGroupName="Material_Course">
+            <div class="form-group row">
+              <label for="Name_Material" class="col-sm-2 col-form-label"
+                >Descripción:
+              </label>
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  [ngClass]="{
+                    'is-invalid':
+                      courseForm.controls.Material_Course['controls'][
+                        'Name_Material'
+                      ].invalid &&
+                      courseForm.controls.Material_Course['controls'][
+                        'Name_Material'
+                      ].touched,
+                    'is-valid':
+                      courseForm.controls.Material_Course['controls'][
+                        'Name_Material'
+                      ].valid
+                  }"
+                  id="Name_Material"
+                  formControlName="Name_Material"
+                />
+                <div
+                  *ngIf="
+                    this.courseForm.get('Material_Course')['controls'][
+                      'Name_Material'
+                    ]?.errors?.required
+                  "
+                  class="invalid-feedback"
+                >
+                  El campo descripción es requerido
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="Route_Material" class="col-sm-2 col-form-label"
+                >Subir Archivo:</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="file"
+                  class="form-control"
+                  [ngClass]="{
+                    'is-invalid':
+                      courseForm.controls.Material_Course['controls'][
+                        'Route_Material'
+                      ].invalid &&
+                      courseForm.controls.Material_Course['controls'][
+                        'Route_Material'
+                      ].touched,
+                    'is-valid':
+                      courseForm.controls.Material_Course['controls'][
+                        'Route_Material'
+                      ].valid
+                  }"
+                  id="Route_Material"
+                  formControlName="Route_Material"
+                />
+                <div
+                  *ngIf="
+                    this.courseForm.get('Material_Course')['controls'][
+                      'Route_Material'
+                    ]?.errors?.required
+                  "
+                  class="invalid-feedback"
+                >
+                  Es necesario subir un archivo
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Descripción</th>
+                  <th>Link</th>
+                  <th style="width: 20%;">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let material of Materials_Course">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <button class="btn btn-danger">
+                      <i class="far fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row" style="justify-content: center">
+            <div class="form-inline">
+              <div class="form-check" style="margin: 10px">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="Final_Exam"
+                  formControlName="Final_Exam"
+                />
+                <label class="form-check-label" for="Final_Exam">
+                  Examen Final
+                </label>
+              </div>
+              <a [routerLink]="['examenes/edit/final',0]" class="btn btn-secondary">
+                ...
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer text-center">
+      <div class="btn-group" role="group">
+        <button class="btn btn-info">Activar Curso</button>
+        <a routerLink="examenes" class="btn btn-secondary">
+          Configurar Examen
+        </a>
+        <button class="btn btn-success">Grabar</button>
+        <button class="btn btn-danger" (click)="goBack()">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

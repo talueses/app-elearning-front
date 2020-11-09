@@ -1,0 +1,89 @@
+<br />
+<div class="card">
+  <div class="card-header text-right">
+    <a routerLink="nuevo" class="btn btn-success">
+      <i class="fas fa-plus"></i> &nbsp; Nueva Empresa
+    </a>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <form>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Buscar"
+              aria-label="Buscar"
+              aria-describedby="button-addon2"
+              name="filterUser"
+              [(ngModel)]="filterCompany"
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                id="button-addon2"
+              >
+                Buscar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead class="thead" style="text-align: center;">
+              <tr>
+                <th>#</th>
+                <th>C&oacute;digo</th>
+                <th>Contacto</th>
+                <th>Celular</th>
+                <th>Email</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let company of companies | paginate: { itemsPerPage: 10, currentPage: p } | filter: filterCompany">
+                <td>{{ company.id }}</td>
+                <td>{{ company.id }}</td>
+                <td>{{ company.nombres }} {{ company.apellidos }}</td>
+                <td>{{ company.celular }}</td>
+                <td>{{ company.email }}</td>
+                <td style="width: 10px;">
+                  <div
+                    class="btn-group"
+                    role="group"
+                    aria-label="Basic example"
+                  >
+                    <a
+                      [routerLink]="[company.id]"
+                      class="btn btn-secondary"
+                    >
+                      <i class="far fa-eye"></i>
+                    </a>
+                    <a
+                      [routerLink]="['edit/'+company.id]"
+                      class="btn btn-info"
+                    >
+                      <i class="far fa-edit"></i>
+                    </a>
+                    <button class="btn btn-danger">
+                      <i class="far fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-center">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>

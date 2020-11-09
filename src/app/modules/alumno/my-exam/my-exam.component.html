@@ -1,0 +1,148 @@
+<br />
+<form [formGroup]="group" (ngSubmit)="submitExam()" novalidate>
+  <div class="card">
+    <div class="card-header">
+      <table class="table table-sm table-borderless">
+        <thead class="text-center">
+          <tr>
+            <th colspan="3">
+              <div *ngIf="exam.typeExam === 1">EXAMEN DE ENTRADA</div>
+              <div *ngIf="exam.typeExam === 2">EXAMEN DE SESIÓN</div>
+              <div *ngIf="exam.typeExam === 3">EXAMEN FINAL</div>
+              {{ exam.tituleExam }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="15%"><b>Docente: </b></td>
+            <td width="70%">{{ exam.teacherCourse }}</td>
+            <td class="text-center">
+              <div *ngIf="exam.timeLimited == 'S'">
+                <button
+                  [disabled]="formularioControl.loading"
+                  type="button"
+                  class="btn btn-success btn-sm btn-block"
+                  (click)="countdown.resume()"
+                >
+                  Iniciar Examen
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><b>Fecha: </b></td>
+            <td>{{ dateExam | date: "dd-MM-yyyy" }}</td>
+            <td rowspan="2" class="text-center">
+              <countdown
+                #countdown
+                [config]="config"
+                (event)="notify($event)"
+                class="btn btn-block btn-outline-dark btn-lg disabled"
+              ></countdown>
+            </td>
+          </tr>
+          <tr>
+            <td><b>Avance: </b></td>
+            <td>
+              <div class="progress">
+                <div
+                  class="progress-bar bg-info"
+                  role="progressbar"
+                  style="width: {{ group.get('percentExam').value }}%"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                >
+                  {{ group.get("percentExam").value }}%
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card-body">
+      <div *ngIf="formularioControl.questionVisible">
+        <div formArrayName="questions" class="form-group">
+          <div
+            *ngFor="let question of questions().controls; let i = index"
+            class="row"
+          >
+            <div [formGroupName]="i" class="col-12">
+              <br />
+              <h5>
+                <b>Pregunta {{ i + 1 }}: </b>
+                {{ exam.questions[i].descriptionQuestion }}
+              </h5>
+              <div *ngFor="let option of exam.questions[i].options">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    formControlName="optionChosen"
+                    value="{{ option.idOption }}"
+                    id="option{{ option.idOption }}{{ i }}"
+                    (change)="updateValuesForm(option, i)"
+                  />
+                  <label
+                    class="form-check-label"
+                    for="option{{ option.idOption }}{{ i }}"
+                  >
+                    {{ option.descriptionOption }}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+      <table class="table table-sm table-borderless">
+        <tbody>
+          <tr>
+            <td width="15%">
+              <button
+                type="button"
+                class="btn btn-secondary btn-sm btn-block"
+                (click)="goBack()"
+              >
+                Regresar
+              </button>
+            </td>
+            <td width="70%"></td>
+            <td>
+              <div *ngIf="!formularioControl.timeVisible">
+                <button
+                  [disabled]="group.invalid || formularioControl.loading"
+                  type="submit"
+                  class="btn btn-danger btn-block btn-sm"
+                >
+                  <span
+                    *ngIf="formularioControl.loading"
+                    class="spinner-border spinner-border-sm mr-5"
+                  ></span>
+                  Terminar
+                </button>
+              </div>
+              <div *ngIf="formularioControl.timeVisible">
+                <button
+                  [disabled]="group.invalid || formularioControl.loading"
+                  (click)="countdown.stop()"
+                  (event)="notify($event)"
+                  class="btn btn-block btn-danger btn-sm"
+                >
+                  <span
+                    *ngIf="formularioControl.loading"
+                    class="spinner-border spinner-border-sm mr-5"
+                  ></span>
+                  Terminar
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</form>

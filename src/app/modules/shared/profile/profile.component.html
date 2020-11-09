@@ -1,0 +1,273 @@
+<br />
+<form [formGroup]="myProfile">
+  <div class="card">
+    <div class="card-header">Mi Perfil</div>
+    <div class="card-body">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="perfilGeneral">Perfil</label>
+          <select
+            id="perfilGeneral"
+            class="form-control"
+            formControlName="perfilGeneral"
+            [ngClass]="{
+              'is-invalid':
+                myProfile.controls['perfilGeneral'].invalid &&
+                myProfile.controls['perfilGeneral'].touched,
+              'is-valid': myProfile.controls['perfilGeneral'].valid
+            }"
+          >
+            <option value=""></option>
+            <option [value]="perfil.id" *ngFor="let perfil of perfilUsers">{{perfil.nombre | uppercase}}</option>
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="emailGeneral">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="emailGeneral"
+            formControlName="emailGeneral"
+            [ngClass]="{
+              'is-invalid':
+                myProfile.controls['emailGeneral'].invalid &&
+                myProfile.controls['emailGeneral'].touched,
+              'is-valid': myProfile.controls['emailGeneral'].valid
+            }"
+          />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="nombresGeneral">Nombres</label>
+          <input
+            type="text"
+            id="nombresGeneral"
+            class="form-control"
+            formControlName="nombresGeneral"
+            [ngClass]="{
+              'is-invalid':
+                myProfile.controls['nombresGeneral'].invalid &&
+                myProfile.controls['nombresGeneral'].touched,
+              'is-valid': myProfile.controls['nombresGeneral'].valid
+            }"
+          />
+          <div
+            *ngIf="myProfile.get('nombresGeneral')?.errors?.required"
+            class="invalid-feedback"
+          >
+            El campo nombres es requerido
+          </div>
+          <div
+            *ngIf="myProfile.get('nombresGeneral')?.errors?.pattern"
+            class="invalid-feedback"
+          >
+            Este campo solo permite texto
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="paternoGeneral">Paterno</label>
+          <input
+            type="text"
+            id="paternoGeneral"
+            class="form-control"
+            formControlName="paternoGeneral"
+            [ngClass]="{
+              'is-invalid':
+                myProfile.controls['paternoGeneral'].invalid &&
+                myProfile.controls['paternoGeneral'].touched,
+              'is-valid': myProfile.controls['paternoGeneral'].valid
+            }"
+          />
+          <div
+            *ngIf="myProfile.get('paternoGeneral')?.errors?.required"
+            class="invalid-feedback"
+          >
+            El campo paterno es requerido
+          </div>
+          <div
+            *ngIf="myProfile.get('nombresGeneral')?.errors?.pattern"
+            class="invalid-feedback"
+          >
+            Este campo solo permite texto
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="maternoGeneral">Materno</label>
+          <input
+            type="text"
+            id="maternoGeneral"
+            class="form-control"
+            formControlName="maternoGeneral"
+            [ngClass]="{
+              'is-invalid':
+                myProfile.controls['maternoGeneral'].invalid &&
+                myProfile.controls['maternoGeneral'].touched,
+              'is-valid': myProfile.controls['maternoGeneral'].valid
+            }"
+          />
+          <div
+            *ngIf="myProfile.get('maternoGeneral')?.errors?.required"
+            class="invalid-feedback"
+          >
+            El campo materno es requerido
+          </div>
+          <div
+            *ngIf="myProfile.get('maternoGeneral')?.errors?.pattern"
+            class="invalid-feedback"
+          >
+            Este campo solo permite texto
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="celularGeneral">Celular</label>
+          <input
+            type="text"
+            id="celularGeneral"
+            class="form-control"
+            formControlName="celularGeneral"
+            [ngClass]="{
+              'is-invalid':
+                myProfile.controls['celularGeneral'].invalid &&
+                myProfile.controls['celularGeneral'].touched,
+              'is-valid': myProfile.controls['celularGeneral'].valid
+            }"
+          />
+          <div
+            *ngIf="myProfile.get('celularGeneral')?.errors?.required"
+            class="invalid-feedback"
+          >
+            El campo celular es requerido
+          </div>
+          <div
+            *ngIf="myProfile.get('celularGeneral')?.errors?.pattern"
+            class="invalid-feedback"
+          >
+            Este campo solo permite números
+          </div>
+          <div
+            *ngIf="myProfile.get('celularGeneral')?.errors?.minLength"
+            class="invalid-feedback"
+          >
+            Es necesario ingresar al menos 9 números
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="dniGeneral">DNI</label>
+          <input
+            type="text"
+            id="dniGeneral"
+            class="form-control"
+            formControlName="dniGeneral"
+            [ngClass]="{
+              'is-invalid':
+                myProfile.controls['dniGeneral'].invalid &&
+                myProfile.controls['dniGeneral'].touched,
+              'is-valid': myProfile.controls['dniGeneral'].valid
+            }"
+          />
+          <div
+            *ngIf="myProfile.get('dniGeneral')?.errors?.required"
+            class="invalid-feedback"
+          >
+            El campo DNI es requerido
+          </div>
+          <div
+            *ngIf="myProfile.get('dniGeneral')?.errors?.pattern"
+            class="invalid-feedback"
+          >
+            Este campo solo permite números
+          </div>
+          <div
+            *ngIf="myProfile.get('dniGeneral')?.errors?.minLength"
+            class="invalid-feedback"
+          >
+            Es necesario ingresar al menos 8 números
+          </div>
+        </div>
+        <!-- <div class="form-group col-md-6">
+          <label for="passwordGeneral">Contraseña</label>
+          <input
+            type="password"
+            id="passwordGeneral"
+            class="form-control"
+            formControlName="passwordGeneral"
+            [ngClass]="{
+              'is-invalid':
+                myProfile.controls['passwordGeneral'].invalid &&
+                myProfile.controls['passwordGeneral'].touched,
+              'is-valid': myProfile.controls['passwordGeneral'].valid
+            }"
+          />
+          <div
+            *ngIf="myProfile.get('passwordGeneral')?.errors?.required"
+            class="invalid-feedback"
+          >
+            El campo contraseña es requerido
+          </div>
+        </div> -->
+      </div>
+      <div class="form-group">
+        <label for="direccionGeneral">Dirección</label>
+        <input
+          type="text"
+          id="direccionGeneral"
+          class="form-control"
+          formControlName="direccionGeneral"
+          [ngClass]="{
+            'is-invalid':
+              myProfile.controls['direccionGeneral'].invalid &&
+              myProfile.controls['direccionGeneral'].touched,
+            'is-valid': myProfile.controls['direccionGeneral'].valid
+          }"
+        />
+        <div
+          *ngIf="myProfile.get('direccionGeneral')?.errors?.required"
+          class="invalid-feedback"
+        >
+          El campo dirección es requerido
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="nacimientoGeneral">Fecha de Nacimiento</label>
+          <input
+            type="date"
+            id="nacimientoGeneral"
+            class="form-control"
+            formControlName="nacimientoGeneral"
+            [ngClass]="{
+              'is-invalid':
+                myProfile.controls['nacimientoGeneral'].invalid &&
+                myProfile.controls['nacimientoGeneral'].touched,
+              'is-valid': myProfile.controls['nacimientoGeneral'].valid
+            }"
+          />
+          <div
+            *ngIf="myProfile.get('nacimientoGeneral')?.errors?.required"
+            class="invalid-feedback"
+          >
+            El campo nacimiento es requerido
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer text-center">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button
+          type="submit"
+          class="btn btn-success"
+          [disabled]="myProfile.invalid"
+          (click)="onSubmit()"
+        >
+          Grabar
+        </button>
+        <a routerLink="" class="btn btn-secondary">Cancelar</a>
+      </div>
+    </div>
+  </div>
+</form>

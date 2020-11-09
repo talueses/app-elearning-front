@@ -1,0 +1,60 @@
+<br>
+<div class="card" *ngIf="courses.length > 0 else notCourses">
+  <div class="card-header">
+    Estos son los cursos que tiene asignado, seleccione uno y vaya al curso:
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="thead" style="text-align: center;">
+          <tr>
+            <th>#</th>
+            <th>Cursos</th>
+            <th>Avance</th>
+            <th>Docente</th>
+            <th>Seleccionar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let course of courses | paginate : { itemsPerPage: 10 , currentPage: p}">
+            <td>{{ course.id }}</td>
+            <td>{{ course.nombre }}</td>
+            <td>
+              <div class="progress">
+                <div
+                  class="progress-bar bg-info"
+                  role="progressbar"
+                  style="width: {{ course.avance }};"
+                  aria-valuenow="{{ course.avance }}"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                >
+                  {{ course.avance }}
+                </div>
+              </div>
+            </td>
+            <td>{{ course.docente }}</td>
+            <td style="text-align: center;">
+              <a
+                [routerLink]="['/alumno/myCourses', course.id]"
+                class="btn btn-info"
+              >
+                <i class="far fa-eye"></i> &nbsp; Ir al curso
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card-footer text-center">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
+<ng-template #notCourses>
+  <div class="card">
+    <div class="card-body" style="text-align: center;">
+      <b>Usted no tiene ningún curso asignado</b>
+    </div>
+  </div>
+</ng-template>

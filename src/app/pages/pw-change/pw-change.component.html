@@ -1,0 +1,58 @@
+<div class="col-md-6 offset-md-3 mt-5">
+    <div class="alert alert-info">
+        <form class=" card " [formGroup]="form" (ngSubmit)="onSubmit($event)">
+            <h4 class="card-header text-center">PLATAFORMA EDUCATIVA - ITGREEN</h4>
+            <div class="card-body ">
+                <h4 class="card-title text-center">POR SU SEGURIDAD ACTUALICE SU CONTRASEÑA</h4>
+                <div class="form-group ">
+                    <label for="">Contraseña Actual</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="current_pw"
+                        [ngClass]="{
+                            'is-invalid':
+                              form.controls['current_pw'].invalid &&
+                              form.controls['current_pw'].touched,
+                            'is-valid': form.controls['current_pw'].valid
+                          }" />
+                        <div *ngIf="form.get('current_pw')?.errors?.required" class="invalid-feedback" >Contraseña requerida!</div>
+                </div>
+                <div class="form-group ">
+                    <label for="">Nueva Contraseña:</label>
+                    <input
+                        type="password"
+                        class="form-control"
+                        formControlName="new_pw"
+                        [ngClass]="{
+                            'is-invalid':
+                              form.controls['new_pw'].invalid &&
+                              form.controls['new_pw'].dirty,
+                            'is-valid': form.controls['new_pw'].valid
+                          }" />
+                        <div *ngIf="form.get('new_pw')?.errors?.required" class="invalid-feedback" >Contraseña requerida!</div>
+                        <div *ngIf="form.get('new_pw')?.errors?.minlength" class="invalid-feedback" >La contraseña debe tener por lo menos 7 caracteres.</div>
+                </div>
+                <div class="form-group ">
+                    <label for="">Confirmar Contraseña:</label>
+                    <input
+                        type="password"
+                        class="form-control"
+                        formControlName="confirm_pw"
+                        [ngClass]="{
+                            'is-invalid':
+                              form.controls['confirm_pw'].invalid &&
+                              form.controls['confirm_pw'].dirty,
+                            'is-valid': form.controls['confirm_pw'].valid
+                          }" />
+                        <div *ngIf="form.get('confirm_pw')?.errors?.required" class="invalid-feedback" >Contraseña requerida!</div>
+                        <div *ngIf="form.get('confirm_pw')?.errors?.confirmPasswordValidator" class="invalid-feedback" >Las contraseña deben coincidir.</div>
+                </div>
+                <div class="form-group modal-footer ">
+                    <button class="btn btn-success btn-lg"  type="submit" [disabled]="form.invalid">Actualizar</button>
+                    <button class="btn btn-danger btn-lg" (click)="exit()" >Cancelar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

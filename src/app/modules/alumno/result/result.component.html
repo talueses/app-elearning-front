@@ -1,0 +1,132 @@
+<br />
+<div class="card" *ngIf="exam.Type_Exam != 3; else finalExam">
+  <div class="card-body">
+    <div class="row text-center">
+      <div class="col-sm-12">
+        <b *ngIf="exam.Type_Exam == 1">EXAMEN DE ENTRADA</b>
+        <b *ngIf="exam.Type_Exam == 2">EXAMEN DE SESIÓN</b>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">CURSO: {{ exam.Title_Course }}</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">DOCENTE: {{ exam.Teacher_Course }}</div>
+      <div class="col-sm-4">ALUMNO: {{ exam.Student_Course }}</div>
+      <div class="col-sm-4">FECHA:</div>
+    </div>
+    <hr />
+    <br />
+    <div class="row text-center">
+      <div class="col-sm-12">
+        <h5 style="color: #00617f" *ngIf="exam.Passed_Exam">
+          <b>UD. APROBO ESTE EXAMEN</b>
+        </h5>
+        <h5 style="color: red" *ngIf="!exam.Passed_Exam">
+          <b>UD. NO APROBO ESTE EXAMEN</b>
+        </h5>
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead class="thead-light">
+              <tr>
+                <th>Detalle</th>
+                <th>Valor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Respuestas Correctas</td>
+                <td>{{ exam.Correct_Questions }}</td>
+              </tr>
+              <tr>
+                <td>Respuestas Incorrectas</td>
+                <td>{{ exam.Incorrect_Questions }}</td>
+              </tr>
+              <tr>
+                <td>Tiempo Total</td>
+                <td>{{ exam.Time_Total }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-center">
+    <button class="btn btn-secondary">Regresar al Curso</button>
+  </div>
+</div>
+<ng-template #finalExam>
+  <div class="card">
+    <div class="card-body">
+      <div class="row text-center">
+        <div class="col-sm-12">
+          <b>RESULTADO FINAL DEL CURSO</b>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">CURSO: {{ exam.Title_Course }}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">DOCENTE: {{ exam.Teacher_Course }}</div>
+        <div class="col-sm-4">ALUMNO: {{ exam.Student_Course }}</div>
+        <div class="col-sm-4">FECHA:</div>
+      </div>
+      <hr />
+      <br />
+      <div class="row text-center">
+        <div class="col-sm-12">
+          <div style="color: #00617f" *ngIf="exam.Passed_Course">
+            <h5><b>Usted ha obtenido el certificado de este curso</b></h5>
+            <button class="btn" style="color: #00617f" (click)="createCertificate()">
+              Genera tu certificado <i class="fas fa-certificate"></i>
+            </button>
+          </div>
+          <div style="color: red" *ngIf="!exam.Passed_Course">
+            <h5>
+              <b
+                >Usted no ha obtenido el certificado de este curso. Debe volver
+                a rendir el examen</b
+              >
+            </h5>
+            <p>Debe de volver a rendir el examen para obtener el certificado</p>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead class="thead-light">
+                <tr>
+                  <th>Detalle</th>
+                  <th>Valor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Respuestas Correctas</td>
+                  <td>{{ exam.Correct_Questions }}</td>
+                </tr>
+                <tr>
+                  <td>Respuestas Incorrectas</td>
+                  <td>{{ exam.Incorrect_Questions }}</td>
+                </tr>
+                <tr>
+                  <td>Tiempo Total</td>
+                  <td>{{ exam.Time_Total }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

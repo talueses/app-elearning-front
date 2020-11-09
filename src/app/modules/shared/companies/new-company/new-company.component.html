@@ -1,0 +1,273 @@
+<br />
+<form [formGroup]="companyForm" (ngSubmit)="submit()">
+      <div class="card">
+        <div class="card-header">
+          <b *ngIf="id; else nuevo">Editar Empresa</b>
+          <ng-template #nuevo>
+              <b>Nueva Empresa</b>
+          </ng-template>
+        </div>
+        <div class="card-body">
+          <div class="form-group row">
+            <label for="Title_Course" class="col-sm-2 col-form-label">RUC:</label>
+            <div class="col-sm-5">
+              <input
+                type="text"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': companyForm.controls['RUC_Company'].invalid &&
+                                companyForm.controls['RUC_Company'].touched,
+                  'is-valid': companyForm.controls['RUC_Company'].valid
+                }"
+                id="RUC_Company"
+                formControlName="RUC_Company"
+              />
+              <div
+                *ngIf="companyForm.get('RUC_Company')?.errors?.required"
+                class="invalid-feedback"
+              >
+                El campo RUC es requerido
+              </div>
+              <div
+                  *ngIf="companyForm.get('RUC_Company')?.errors?.pattern"
+                  class="invalid-feedback"
+                >
+                  El campo RUC solo permite números
+                </div>
+                <div
+                  *ngIf="companyForm.get('RUC_Company')?.errors?.minlength"
+                  class="invalid-feedback"
+                >
+                  Es necesario ingresar al menos 11 n&uacute;meros
+                </div>
+                <div
+                  *ngIf="companyForm.get('RUC_Company')?.errors?.maxlength"
+                  class="invalid-feedback"
+                >
+                  El campo RUC permite como m&aacute;ximo 11 n&uacute;meros
+                </div>
+            </div>
+            <label for="Code_Company" class="col-sm-1 col-form-label"
+              >C&oacute;digo:</label
+            >
+            <div class="col-sm-4">
+                <input
+                name="Code_Company"
+                type="text"
+                class="form-control"
+                disabled="true"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-10">
+                  <label for="Name_Company">Raz&oacute;n Social:</label>
+                  <input
+                      type="text"
+                      formControlName="Name_Company"
+                      class="form-control"
+                      [ngClass]="{
+                          'is-invalid':
+                          companyForm.controls['Name_Company'].invalid &&
+                          companyForm.controls['Name_Company'].touched,
+                          'is-valid': companyForm.controls['Name_Company'].valid
+                      }"
+                  />
+                  <div *ngIf="companyForm.get('Name_Company')?.errors?.required" class="invalid-feedback">
+                      El campo es requerido
+                  </div>
+            </div>
+            <div class="col-md-12">
+              <label for="Address_Company">Direcci&oacute;n:</label>
+              <input
+                  type="text"
+                  formControlName="Address_Company"
+                  maxlength="9"
+                  class="form-control"
+                  [ngClass]="{
+                      'is-invalid':
+                      companyForm.controls['Address_Company'].invalid &&
+                      companyForm.controls['Address_Company'].touched,
+                      'is-valid': companyForm.controls['Address_Company'].valid
+                    }"
+              />
+              <div
+                  *ngIf="companyForm.get('Address_Company')?.errors?.required"
+                  class="invalid-feedback"
+                >
+                  El campo Direcci&oacute;n es requerido
+                </div>
+                <!-- <div
+                  *ngIf="companyForm.get('Celular_User')?.errors?.minLength"
+                  class="invalid-feedback"
+                >
+                  Es necesario ingresar al menos 9 números
+                </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="card">
+        <div class="card-header">
+            <b>Datos de Contacto</b>
+        </div>
+        <div class="card-body">
+          <div formGroupName="contactCompanyForm">
+          <div class="form-row">
+            <div class="col-md-6">
+              <label for="Email_User">Email:</label>
+              <input
+                  type="email"
+                  formControlName="Email_User"
+                  class="form-control"
+                  [ngClass]="{
+                      'is-invalid':
+                      companyForm.controls.contactCompanyForm['controls']['Email_User'].invalid &&
+                      companyForm.controls.contactCompanyForm['controls']['Email_User'].touched,
+                      'is-valid': companyForm.controls.contactCompanyForm['controls']['Email_User'].valid
+                  }"
+              />
+              <div *ngIf="companyForm.get('contactCompanyForm')['controls']['Email_User']?.errors?.required" class="invalid-feedback">
+                  El campo nombres es requerido
+              </div>
+              <div *ngIf="companyForm.get('contactCompanyForm')['controls']['Email_User']?.errors?.email" class="invalid-feedback">
+                Ingrese un email v&aacute;lido
+            </div>
+        </div>
+        <div class="col-md-6">
+          <label for="Password_User">Contraseña:</label>
+          <input
+              type="password"
+              formControlName="Password_User"
+              class="form-control"
+              [ngClass]="{
+                  'is-invalid':
+                  companyForm.controls.contactCompanyForm['controls']['Password_User'].invalid &&
+                  companyForm.controls.contactCompanyForm['controls']['Password_User'].touched,
+                  'is-valid': companyForm.controls.contactCompanyForm['controls']['Password_User'].valid
+              }"
+          />
+          <div *ngIf="companyForm.get('contactCompanyForm')['controls']['Password_User']?.errors?.required" class="invalid-feedback">
+              El campo es requerido
+          </div>
+    </div>
+            <div class="col-md-6">
+                  <label for="Nombres_User">Nombres:</label>
+                  <input
+                      type="text"
+                      formControlName="Nombres_User"
+                      class="form-control"
+                      [ngClass]="{
+                          'is-invalid':
+                          companyForm.controls.contactCompanyForm['controls']['Nombres_User'].invalid &&
+                          companyForm.controls.contactCompanyForm['controls']['Nombres_User'].touched,
+                          'is-valid': companyForm.controls.contactCompanyForm['controls']['Nombres_User'].valid
+                      }"
+                  />
+                  <div *ngIf="companyForm.get('contactCompanyForm')['controls']['Nombres_User']?.errors?.required" class="invalid-feedback">
+                      El campo nombres es requerido
+                  </div>
+                  <div *ngIf="companyForm.get('contactCompanyForm')['controls']['Nombres_User']?.errors?.pattern" class="invalid-feedback">
+                    El campo nombres no permite n&uacute;meros ni s&iacute;mbolos
+                </div>
+            </div>
+            <div class="col-md-6">
+              <label for="ApPaterno_User">Apellido Paterno:</label>
+              <input
+                  type="text"
+                  formControlName="ApPaterno_User"
+                  class="form-control"
+                  [ngClass]="{
+                      'is-invalid':
+                      companyForm.controls.contactCompanyForm['controls']['ApPaterno_User'].invalid &&
+                      companyForm.controls.contactCompanyForm['controls']['ApPaterno_User'].touched,
+                      'is-valid': companyForm.controls.contactCompanyForm['controls']['ApPaterno_User'].valid
+                  }"
+              />
+              <div
+                  *ngIf="companyForm.get('contactCompanyForm')['controls']['ApPaterno_User']?.errors?.required"
+                  class="invalid-feedback"
+                >
+                  Este campo es requerido
+                </div>
+                <div
+                  *ngIf="companyForm.get('contactCompanyForm')['controls']['ApPaterno_User']?.errors?.pattern"
+                  class="invalid-feedback"
+                >
+                Este campo no permite n&uacute;meros ni s&iacute;mbolos
+              </div>
+            </div>
+      
+            <div class="col-md-6">
+              <label for="ApMaterno_User">Apellido Materno:</label>
+              <input
+                  type="text"
+                  id="ApMaterno_User"
+                  formControlName="ApMaterno_User"
+                  class="form-control"
+                  [ngClass]="{
+                      'is-invalid':
+                      companyForm.controls.contactCompanyForm['controls']['ApMaterno_User'].invalid &&
+                      companyForm.controls.contactCompanyForm['controls']['ApMaterno_User'].touched,
+                      'is-valid': companyForm.controls.contactCompanyForm['controls']['ApMaterno_User'].valid
+                  }"
+              />
+              <div *ngIf="companyForm.get('contactCompanyForm')['controls']['ApMaterno_User']?.errors?.required" class="invalid-feedback">
+                  El campo es requerido
+              </div>
+            </div>
+      
+            <div class="col-md-6">
+              <label for="Celular_User">Celular:</label>
+              <input
+                  type="text"
+                  formControlName="Celular_User"
+                  class="form-control"
+                  [ngClass]="{
+                      'is-invalid':
+                      companyForm.controls.contactCompanyForm['controls']['Celular_User'].invalid &&
+                      companyForm.controls.contactCompanyForm['controls']['Celular_User'].touched,
+                      'is-valid': companyForm.controls.contactCompanyForm['controls']['Celular_User'].valid
+                    }"
+              />
+              <div
+                  *ngIf="companyForm.get('contactCompanyForm')['controls']['Celular_User']?.errors?.required"
+                  class="invalid-feedback"
+                >
+                  El campo celular es requerido
+                </div>
+                <div
+                  *ngIf="companyForm.get('contactCompanyForm')['controls']['Celular_User']?.errors?.pattern"
+                  class="invalid-feedback"
+                >
+                  Este campo solo permite n&uacute;meros
+                </div>
+                <div
+                  *ngIf="companyForm.get('contactCompanyForm')['controls']['Celular_User']?.errors?.minlength"
+                  class="invalid-feedback"
+                >
+                  Es necesario ingresar al menos 9 n&uacute;meros
+                </div>
+                <div
+                  *ngIf="companyForm.get('contactCompanyForm')['controls']['Celular_User']?.errors?.maxlength"
+                  class="invalid-feedback"
+                >
+                  El campo permite como m&aacute;ximo 9 n&uacute;meros
+                </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="row tjustify-content-md-center text-center mt-3">
+        <div class="col-md-12">
+          <button type="submit" class="btn btn-success m-1" [disabled]="companyForm.invalid">
+            Grabar
+          </button>
+          <button type="button" (click)="goback()" class="btn btn-danger m-1">
+            Cancelar
+          </button>
+        </div>
+    </div>
+</form>
